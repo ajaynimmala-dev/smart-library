@@ -7,4 +7,11 @@
     <orderEntry type="jdk" jdkName="Python 3.12 (smart-library)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
+  <component name="TemplatesService">
+    <option name="TEMPLATE_FOLDERS">
+      <list>
+        <option value="$MODULE_DIR$/frontend" />
+      </list>
+    </option>
+  </component>
 </module>
