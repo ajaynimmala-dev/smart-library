@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+
 import os
 
 template_dir = os.path.abspath('../frontend')
@@ -10,6 +11,9 @@ app = Flask(__name__, template_folder=template_dir)
 def home():
     return render_template('home.html')
 
+@app.route('/login')
+def login():
+    return render_template('login.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
