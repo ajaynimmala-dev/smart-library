@@ -1,4 +1,4 @@
-from flask import render_template,Blueprint
+from flask import render_template,Blueprint,request
 
 from database.models import User, db
 
@@ -12,9 +12,10 @@ def login():
 def register():
     return render_template('register.html')
 
-@user.route('/create')
+@user.route('/create',methods=["POST"])
 def create():
-    user = User()
+    data = request.get_json()
+    user = User(user_id=data.get("rollnumber"),name=data.get("name"),email=data.get("email"),password_hash=data.get("password"))
     db.session.add(user)
     db.session.commit()
     return 'success'
