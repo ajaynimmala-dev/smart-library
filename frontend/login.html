@@ -5,11 +5,14 @@
     <title>Login</title>
 </head>
 <body>
+<form method="POST" action="/login">
     <label>Email:
-        <input type="email"/>
+        <input name="email" type="email"/>
     </label>
     <label>
-        Pass:<input type="password"/>
+        Pass:<input name="password" type="password"/>
     </label>
+    <input type="submit" value="submit"/>
+</form>
 </body>
 </html>
