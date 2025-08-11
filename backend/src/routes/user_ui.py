@@ -11,8 +11,10 @@ def login():
             form = request.form
             user_email = form.get("email")
             user_pass = form.get("password")
-            if User().is_user_valid(email=user_email,password=user_pass):
-                return "success"
+            check_email = User.query.filter_by(email=user_email).first()
+            if check_email:
+                return 'login success' if check_email.password_hash == user_pass else 'password is incorrect'
+            return 'email is not exist'
     return render_template('login.html')
 
 @user.route('/register')
