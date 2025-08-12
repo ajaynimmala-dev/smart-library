@@ -9,6 +9,7 @@ template_dir = os.path.abspath('../frontend')
 
 app = Flask(__name__, template_folder=template_dir)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+app.secret_key = 'your_super_secret_key_here'
 
 app.register_blueprint(user)
 db.init_app(app)
