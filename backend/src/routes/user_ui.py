@@ -14,10 +14,12 @@ def login():
             form = request.form
             user_email = form.get("email")
             user_pass = form.get("password")
-            check_email = User.query.filter_by(email=user_email).first()
-            if check_email:
-                if check_email.password_hash == user_pass:
-                    flash('successful login')
+            user = User.query.filter_by(email=user_email).first()
+            if user:
+                if user.password_hash == user_pass:
+                    random_number = "555"
+                    flash('successful login '+ random_number) # falsh won't stay that long to copy
+                    dashboard_keys.update({random_number:user.email})
                     return redirect(url_for('users.dashboard'))
                 else:
                     flash('incorrect password')
@@ -31,9 +33,9 @@ def login():
 @user.route('/dashboard',methods=["POST"])
 def dashboard():
     data = request.get_json()
-    key = data.get("secret_key")
-    if key:
-        return render_template('dashboard.html')
+    random = data.get("secret_key")
+    if dashboard_keys.get(random):
+            return render_template('dashboard.html')
     flash('You need to login first')
     return redirect(url_for('users.login'))
 
