@@ -1,4 +1,6 @@
-from flask import render_template, Blueprint, request, redirect,url_for,flash
+from flask import render_template, Blueprint, request, redirect, url_for, flash, jsonify
+
+from random import randint
 
 from flask_login import current_user
 
@@ -7,7 +9,7 @@ from database.models import User, db
 user = Blueprint('users', __name__)
 
 dashboard_keys = {
-    "555":"ajaynimmala18@gmail.com"
+    "55":1
 }
 
 
@@ -21,10 +23,14 @@ def login():
             user = User.query.filter_by(email=user_email).first()
             if user:
                 if user.password_hash == user_pass:
-                    random_number = "555"
-                    flash('successful login '+ random_number) # falsh won't stay that long to copy
-                    dashboard_keys.update({random_number:user.email})
-                    return redirect(url_for('users.dashboard'))
+                    random_number = str(randint(0, 1000))
+                    flash('successful login')  # falsh won't stay that long to copy
+                    dashboard_keys.update({random_number: user.email})
+                    return jsonify(
+                        {
+                            "token": random_number
+                        }
+                    )
                 else:
                     flash('incorrect password')
                     return redirect(url_for('users.login'))
