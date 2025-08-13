@@ -6,6 +6,10 @@ from database.models import User, db
 
 user = Blueprint('users', __name__)
 
+dashboard_keys = {
+    "555":"ajaynimmala18@gmail.com"
+}
+
 
 @user.route('/login', methods=["POST", "GET"])
 def login():
