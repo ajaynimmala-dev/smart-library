@@ -40,12 +40,12 @@ def login():
     return render_template('login.html')
 
 
-@user.route('/dashboard',methods=["POST"])
+@user.route('/dashboard', methods=["POST"])
 def dashboard():
     data = request.get_json()
     random = data.get("secret_key")
     if dashboard_keys.get(random):
-            return render_template('dashboard.html')
+        return render_template('dashboard.html')
     flash('You need to login first')
     return redirect(url_for('users.login'))
 
